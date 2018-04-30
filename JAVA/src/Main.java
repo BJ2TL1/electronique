@@ -91,10 +91,8 @@ public class Main extends JFrame implements ActionListener{
 	public void sendData(double d)
 	{
 		PrintWriter output = new PrintWriter(serialPort.getOutputStream());
-		while(true) {
 			output.print(d);
 			output.flush();
-		}
 	}
 	
 	public double getData()
