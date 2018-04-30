@@ -10,6 +10,7 @@ import com.fazecast.jSerialComm.*;
 public class Main extends JFrame implements ActionListener{
 	public JButton button1;
 	public JButton button2;
+	public JButton button3;
 	public JTextField text1;
 	public double d1;
 	String s;
@@ -18,6 +19,7 @@ public class Main extends JFrame implements ActionListener{
 	Box bv;
 	Box bh1;
 	Box bh2;
+	public boolean b;
 	
 	public void ask(SerialPort[] values)
 	{
@@ -46,8 +48,14 @@ public class Main extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 	    if ("send".equals(e.getActionCommand())) {
 	    	sendData(Integer.parseInt(text1.getText()));
-	    } else {
-	        d1 = getData();
+	    } else if("receive".equals(e.getActionCommand()))
+	    {
+	    		getData();
+	        
+	    }
+	    else
+	    {
+	    		stop();
 	    }
 	}  
 	
@@ -60,11 +68,15 @@ public class Main extends JFrame implements ActionListener{
 		button2 = new JButton("receive");
 		button2.setActionCommand("receive");
 		button2.addActionListener(this);
+		button3 = new JButton("stop");
+		button3.setActionCommand("stop");
+		button3.addActionListener(this);
 		text1 = new JTextField();
 		bv = Box.createVerticalBox();
 		bh1 = Box.createHorizontalBox();
 		bh1.add(button1);
 		bh1.add(button2);
+		bh1.add(button3);
 		bh2 = Box.createHorizontalBox();
 		bh2.add(text1);
 		
@@ -99,12 +111,18 @@ public class Main extends JFrame implements ActionListener{
 	{
 		double d = 0.0;
 		Scanner data = new Scanner(serialPort.getInputStream());
-		while(data.hasNextLine()){
+		b= true;
+		while(b==true && data.hasNextLine()){
 			try{d = Double.parseDouble(data.nextLine());}catch(Exception e){}
 			String temp = Double.toString(d);
 			text1.setText(temp);
 		}
 		return d;
+	}
+	
+	public void stop()
+	{
+		b=false;
 	}
 
 	public static void main(String[] args) {
