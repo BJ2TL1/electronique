@@ -209,7 +209,7 @@ public class Comm implements SerialPortEventListener
                 if (singleData != NEW_LINE_ASCII)
                 {
                     logText = new String(new byte[] {singleData});
-                    window.txtLog.append(logText);
+                    window.txtLog.append(logText+"\n");
                 }
                 else
                 {
