@@ -228,11 +228,12 @@ public class Comm implements SerialPortEventListener
     //method that can be called to send data
     //pre: open serial port
     //post: data sent to the other device
-    public void writeData(int leftThrottle)
+    public void writeData(int data)
     {
+    		String s = Integer.toString(data);
         try
         {
-            output.write(leftThrottle);
+            output.write(s.getBytes());
             output.flush();
             //this is a delimiter for the data
             /*output.write(DASH_ASCII);
