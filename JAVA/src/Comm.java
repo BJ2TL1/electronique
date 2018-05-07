@@ -7,8 +7,10 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.TooManyListenersException;
 
+
 public class Comm implements SerialPortEventListener
 {
+	final static int CARRIAGE_RETURN_ASCII = 13;
     //passed from main GUI
     GUI window = null;
 
@@ -234,7 +236,7 @@ public class Comm implements SerialPortEventListener
         try
         {
             output.write(s.getBytes());
-            output.flush();
+            output.write(CARRIAGE_RETURN_ASCII);
             //this is a delimiter for the data
             /*output.write(DASH_ASCII);
             output.flush();
@@ -242,7 +244,7 @@ public class Comm implements SerialPortEventListener
             output.write(rightThrottle);
             output.flush();*/
             //will be read as a byte so it is a space key
-            output.write(SPACE_ASCII);
+            //output.write(SPACE_ASCII);
             output.flush();
         }
         catch (Exception e)
