@@ -47,7 +47,7 @@ public class Main extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 	    if ("send".equals(e.getActionCommand())) {
-	    	sendData(Integer.parseInt(text1.getText()));
+	    //	sendData(Integer.parseInt(text1.getText()));
 	    } else if("receive".equals(e.getActionCommand()))
 	    {
 	    		getData();
@@ -100,19 +100,19 @@ public class Main extends JFrame implements ActionListener{
 	
 
 	
-	public void sendData(double d)
+	/*public void sendData(double d)
 	{
 		PrintWriter output = new PrintWriter(serialPort.getOutputStream());
 			output.print(d);
 			output.flush();
 	}
-	
+	*/
 	public double getData()
 	{
 		double d = 0.0;
 		Scanner data = new Scanner(serialPort.getInputStream());
 		b= true;
-		while(b==true && data.hasNextLine()){
+		while(b==true){
 			try{d = Double.parseDouble(data.nextLine());}catch(Exception e){}
 			String temp = Double.toString(d);
 			text1.setText(temp);
@@ -150,7 +150,7 @@ public class Main extends JFrame implements ActionListener{
 			return;
 		}
 		//serialPort.setComPortParameters(9600, 8, 1, SerialPort.NO_PARITY);
-		m.serialPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 0, 0);
+		m.serialPort.setComPortTimeouts(SerialPort.TIMEOUT_SCANNER, 0, 0);
 
 		//System.out.println("Done.");
 	}
