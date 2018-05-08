@@ -272,7 +272,8 @@ public class GUI extends javax.swing.JFrame {
                 pack();
             }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeftAccelActionPerformed
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {
+    		btnReceive.setText(Integer.toString(keybindingController.getTextToSend()));//GEN-FIRST:event_btnLeftAccelActionPerformed
         communicator.writeData(keybindingController.getTextToSend());
         //keybindingController.updateLabels();
     }//GEN-LAST:event_btnLeftAccelActionPerformed
