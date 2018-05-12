@@ -10,7 +10,7 @@ import java.util.TooManyListenersException;
 
 public class Comm implements SerialPortEventListener
 {
-	final static int CARRIAGE_RETURN_ASCII = 13;
+	
     //passed from main GUI
     GUI window = null;
 
@@ -36,6 +36,7 @@ public class Comm implements SerialPortEventListener
     final static int TIMEOUT = 2000;
 
     //some ascii values for for certain things
+    final static int CARRIAGE_RETURN_ASCII = 13;
     final static int SPACE_ASCII = 32;
     final static int DASH_ASCII = 45;
     final static int NEW_LINE_ASCII = 10;
