@@ -212,7 +212,7 @@ public class Comm implements SerialPortEventListener
                 if (singleData != NEW_LINE_ASCII)
                 {
                     logText = new String(new byte[] {singleData});
-                    window.txtLog.append(logText+"\n");
+                    window.txtLog.append(logText);
                 }
                 else
                 {
@@ -238,14 +238,6 @@ public class Comm implements SerialPortEventListener
         {
             output.write(s.getBytes());
             output.write(CARRIAGE_RETURN_ASCII);
-            //this is a delimiter for the data
-            /*output.write(DASH_ASCII);
-            output.flush();
-            
-            output.write(rightThrottle);
-            output.flush();*/
-            //will be read as a byte so it is a space key
-            //output.write(SPACE_ASCII);
             output.flush();
         }
         catch (Exception e)
