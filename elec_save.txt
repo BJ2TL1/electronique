@@ -1,0 +1,121 @@
+#include <main.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char stream[10];
+float thr = 20;
+void red() {
+   output_a(0x02);
+}
+void green() {
+   output_a(0x01);
+}
+void clear() {
+   output_a(0x00);
+}
+void toggleRed() {
+   int i = 0;
+   while(i < 1) {
+      red();
+      delay_ms(50);
+      clear();
+      delay_ms(50);
+      i++;
+   }
+}
+char c;
+#INT_RDA
+void RDA_isr() {
+   /*int i=0;
+   for(i; i<10;i++) {*/
+   //stream[i] = getc();
+   gets(stream);
+   thr = atof(stream);
+}
+
+void main()
+{
+   enable_interrupts(INT_RDA);
+   enable_interrupts(GLOBAL);
+   setup_low_volt_detect(FALSE);
+   setup_timer_1(T1_INTERNAL);
+   setup_timer_0(RTCC_INTERNAL);
+  float time = 0;
+  float distance = 0;
+  delay_ms(100);
+   
+   int i = 0;
+   for ( i=0;i<4;i++) {
+      green();
+      delay_ms(100);
+      red();
+      delay_ms(100);
+      clear();
+   }
+   output_low(PIN_B0);
+   green();
+   while(TRUE)
+   {
+      //RDA_isr();
+      /*if (atof(PIN_C7) != null) {
+         thr = atof(PIN_C7);
+      }*/
+      output_high(PIN_B0);
+      delay_us(20);
+      //delay_ms(1000);
+      output_low(PIN_B0);
+      //set_timer1(0);
+      //green();
+      while(!input(PIN_B4));
+      set_timer1(0);
+      while(input(PIN_B4)) ;
+      time = get_timer1();
+      
+      //distance = time * 17.0;
+      distance = time * 0.00344;
+      char data[10];
+      itoa((int)distance,10,data);
+      puts(data);
+      
+      /*while (time < 6160) { //time = 3079 pour 10cm  ; 6159 pour 20cm
+         green();
+      }*/
+      if (distance < thr) {
+         toggleRed();
+      }
+      else {
+         green();
+      }
+      
+      /*if (distance < thr) {
+         green();
+      }
+      else {
+         red();
+      }*/
+      /*while (time < 6159) { //time = 3079 pour 10cm  ; 6159 pour 20cm
+      int j = 0;
+      green();
+      red();
+      delay_ms(500);
+         for (j= (int) (time) ; j > 0 ; j--) 
+         {  
+            green();
+            delay_ms(500);
+            clear();
+            delay_ms(500);
+         }
+      }*/
+      /*while (time > 6159){
+         red();
+      }*/
+      
+     // printf("%f\r\n", distance);
+      delay_ms(1000);
+     // delay_ms(1000);
+      
+   }
+   
+}
+   
