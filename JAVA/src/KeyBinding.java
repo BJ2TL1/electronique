@@ -38,8 +38,6 @@ public class KeyBinding {
         {
             window.btnSend.setEnabled(true);
             window.txtbox1.setEnabled(true);
-            window.btnReceive.setEnabled(true);
-            window.txtbox2.setEnabled(true);
 
             window.btnDisconnect.setEnabled(true);
             window.btnConnect.setEnabled(false);
@@ -49,8 +47,6 @@ public class KeyBinding {
         {
             window.btnSend.setEnabled(false);
             window.txtbox1.setEnabled(false);
-            window.btnReceive.setEnabled(false);
-            window.txtbox2.setEnabled(false);
 
             window.btnDisconnect.setEnabled(false);
             window.btnConnect.setEnabled(true);
