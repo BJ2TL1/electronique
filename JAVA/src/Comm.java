@@ -232,7 +232,6 @@ public class Comm implements SerialPortEventListener
     //post: data sent to the other device
     public void writeData(int data)
     {
-    		thresh = data;
     		String s = Integer.toString(data);
         try
         {
