@@ -10,7 +10,6 @@ import java.util.TooManyListenersException;
 
 public class Comm implements SerialPortEventListener
 {
-	int thresh=20;
     //passed from main GUI
     GUI window = null;
 
@@ -212,15 +211,6 @@ public class Comm implements SerialPortEventListener
                 if (singleData != NEW_LINE_ASCII)
                 {
                     logText = new String(new byte[] {singleData});
-                    int i = Integer.parseInt(logText);
-                    if(i<thresh)
-                    {
-                    		window.btnSend.setBackground(Color.green);
-                    }
-                    else
-                    {
-                    		window.btnSend.setBackground(Color.red);
-                    }
                     window.txtLog.append(logText);
                 }
                 else
